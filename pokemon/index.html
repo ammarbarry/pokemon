@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+</head>
+<body ng-app="pokedex">
+
+	<div class="container">
+		<h1>Pokésir</h1>
+
+		<!-- Search -->
+		<div ng-controller="searchController">
+        <div>
+          <label >Pokemon ID:</label>
+          <input type="text" ng-model="pokeId" ng-change="searchById(pokeId)">
+        </div>
+        <div>
+          <label >Pokemon Name:</label>
+          <input type="text" ng-model="pokeFilter">
+        </div>
+        <div  >
+              <label for="choosedPokemon">choosed pokemon</label>
+              <select id="choosedPokemon"  ng-model="pokeName">
+                  <option ng-repeat="pokemon in pokemons| filter:pokeFilter" value="{{pokemon.name}}">{{pokemon.name}}</option>
+              </select>
+              <button ng-click="choosedPokemon(pokeName)" type="button" >GO</button>
+        </div>
+    </div>
+
+		<!-- Pokémon information -->
+		<div ng-controller="detailsController">
+      <img ng-src="{{poke.image}}">
+      <h2>{{poke.info}}</h2>
+      <ul>
+        <li ng-repeat="move in poke.moves">{{move.name}}</li>
+      </ul>
+    </div>
+
+	</div>
+
+    <!-- Dependencies -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-resource.min.js"></script>
+
+    <!-- Pokedex app -->
+    <script src="js/pokedex.js"></script>
+
+
+</body>
+</html>
